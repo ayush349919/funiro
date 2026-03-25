@@ -23,7 +23,7 @@ export default function Hero() {
         </p>
 
         <Link to="/shop">
-        <button className="btn btn-lg text-sm mt-8 bg-normal text-white px-8 py-4 font-semibold">
+        <button className="rounded-md text-sm mt-8 bg-normal text-white px-8 py-4 font-semibold">
           BUY NOW
         </button>
         </Link>
