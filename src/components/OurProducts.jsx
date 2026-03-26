@@ -16,17 +16,13 @@ export default function OurProducts({ heading = true, limit = null, button = tru
     }, [status, dispatch]);
 
     const onclickhandler = () => {
-        // Agar currentlimit null hai (matlab sab dikh rahe hain), toh wapas limit (8) set karo
-        // Warna use null (full) kar do
         if (currentlimit === null) {
-            setLimit(limit); // limit prop jo 8 hai
+            setLimit(limit);
         } else {
             setLimit(null);
         }
     }
 
-
-    // Loading State with Centered Spinner
     if (status === 'loading') {
         return (
             <div className="flex flex-col items-center justify-center min-h-100 gap-2">
@@ -52,7 +48,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                             <img
                                 src={product.images[0]} // DummyJSON gives a nice thumbnail
                                 alt={product.title}
-                                className="w-[70%] h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                className="w-[70%] h-[100%] object-cover group-hover:scale-110 transition-transform duration-500"
                             />
                             {product.discountPercentage > 0 && (
                                 <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
