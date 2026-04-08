@@ -22,7 +22,7 @@ export default function Inspiration() {
       {/* Container with justify-end for desktop */}
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-end gap-10 lg:gap-0">
 
-        {/* Left Content - Pushed to left with padding */}
+        {/* Left Content */}
         <div className="w-full lg:w-[35%] text-center lg:text-left px-6 md:px-10 lg:pl-20 lg:pr-10">
           <h2 className="text-[24px] md:text-[32px] text-gray-800 font-extrabold leading-tight">
             50+ Beautiful rooms inspiration
@@ -37,7 +37,7 @@ export default function Inspiration() {
           </Link>
         </div>
 
-        {/* Right Swiper - Fixed to the right corner */}
+        {/* Right Swiper */}
         <div className="w-full lg:w-[65%] inspiration-slider translate-x-4 md:translate-x-10 lg:translate-x-20">
           <Swiper
             modules={[Navigation, Pagination]}
@@ -48,9 +48,9 @@ export default function Inspiration() {
             loop={true}
             breakpoints={{
               640: { slidesPerView: 2.2 },
-              1024: { slidesPerView: 2.8 }, // Smaller images pushed to right
+              1024: { slidesPerView: 2.8 },
             }}
-            className="h-[300px] md:h-[400px]" 
+            className="h-[350px] md:h-[450px] pb-10" /* Padding added for pagination dots */
           >
             {slides.map((slide) => (
               <SwiperSlide key={slide.id} className="relative group overflow-hidden rounded-md bg-white">
@@ -59,11 +59,11 @@ export default function Inspiration() {
                   alt={slide.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-4 left-3 bg-white/80 backdrop-blur-sm p-3 min-w-[120px]">
-                  <p className="text-gray-600 text-[10px] flex items-center gap-1">
-                    0{slide.id} <span className="w-4 h-[1px] bg-gray-600"></span> {slide.category}
+                <div className="absolute bottom-10 left-3 bg-white/80 backdrop-blur-sm p-4 min-w-[150px]">
+                  <p className="text-gray-600 text-[12px] flex items-center gap-1">
+                    0{slide.id} <span className="w-6 h-[1px] bg-gray-600"></span> {slide.category}
                   </p>
-                  <h3 className="text-xs md:text-sm font-bold text-gray-800 mt-1">{slide.title}</h3>
+                  <h3 className="text-sm md:text-lg font-bold text-gray-800 mt-1">{slide.title}</h3>
                 </div>
               </SwiperSlide>
             ))}
@@ -72,17 +72,41 @@ export default function Inspiration() {
       </div>
 
       <style>{`
-        .inspiration-slider .swiper-button-next {
-          right: 15% !important; /* Move button inward from corner */
-          width: 35px;
-          height: 35px;
+        .inspiration-slider .swiper-button-next, 
+        .inspiration-slider .swiper-button-prev {
+          right: 10% !important;
+          width: 40px;
+          height: 40px;
           background: white;
           border-radius: 50%;
-          color: #B88E2F;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+          color: #3b82f6 !important; 
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        } 
+
+        .inspiration-slider .swiper-button-next:after,
+        .inspiration-slider .swiper-button-prev:after {
+          font-size: 16px;
+          font-weight: bold;
         }
+
+        /* 2. Pagination Dots Styling */
+        .inspiration-slider .swiper-pagination-bullet {
+          background: #d1d5db !important; /* Inactive Dot Color */
+          opacity: 1;
+          width: 10px;
+          height: 10px;
+        }
+
+        .inspiration-slider .swiper-pagination-bullet-active {
+          background: #3b82f6 !important; /* <--- Active Dot Color */
+          outline: 1px solid #3b82f6;
+          outline-offset: 4px;
+        }
+
+        /* Responsive Fix */
         @media (max-width: 1024px) {
             .inspiration-slider { transform: translateX(0); }
+            .inspiration-slider .swiper-button-next { right: 5% !important; }
         }
       `}</style>
     </section>
