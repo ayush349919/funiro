@@ -1,7 +1,4 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-
-const UserProfile = () => {
+const Profile = () => {
   // Mock data - You can later replace this with your Auth state
   const user = {
     name: "Aryan Sharma",
@@ -76,4 +73,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default Profile;
