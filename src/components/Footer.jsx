@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 export default function Footer() {
-const [data, setData] = useState({email:""})
+    const [data, setData] = useState({ email: "" })
 
     const handleChange = (e) => {
         setData(e.target.value)
     }
-     const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         e.preventDefault()
         console.log(data);
-     }
+    }
     return (
         <>
             <section>

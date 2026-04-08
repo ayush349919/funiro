@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/Thunks/Thunks";
 import { LoaderCircle, ShoppingCart, Star } from "lucide-react";
+import { addtoCart } from "../Redux/Thunks/Addproducts";
 
 export default function OurProducts({ heading = true, limit = null, button = true }) {
     const [currentlimit, setLimit] = useState(limit)
@@ -21,6 +22,10 @@ export default function OurProducts({ heading = true, limit = null, button = tru
         } else {
             setLimit(null);
         }
+    }
+
+    const onaddtocartHandler = (items) => {
+        dispatch(addtoCart(items))
     }
 
     if (status === 'loading') {
@@ -73,7 +78,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
 
                             <div className="flex items-center justify-between mt-auto">
                                 <span className="text-2xl font-bold text-gray-900">${product.price}</span>
-                                <button className="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-lg transition-colors">
+                                <button onClick={() => onaddtocartHandler(product)} className="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-lg transition-colors">
                                     <ShoppingCart className="w-5 h-5" />
                                 </button>
                             </div>

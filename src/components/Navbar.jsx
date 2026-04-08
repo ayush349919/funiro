@@ -1,39 +1,12 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../Redux/slices/theme";
-import { Heart, Search, ShoppingCart, UserRound } from "lucide-react";
+import { Heart, ShoppingCart, UserRound } from "lucide-react"; // Search hta diya
 import logo from "../assets/main.svg";
-import { useRef, useState, useEffect } from "react"; // 1. useEffect add kiya
 
 export default function Navbar() {
   const theme = useSelector((state) => state.theme.value);
   const dispatch = useDispatch();
-  const [show, setShow] = useState(false);
-  const searchRef = useRef(null);
-  const [input, setInput] = useState('')
-
-const handleChange = (e) => {
- setInput(e.target.value);
- console.log(input);
-}
-
-  // 2. Correct Way: useEffect ke andar listener lagana
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShow(false);
-      }
-      console.log();
-    };
-
-    if (show) { // Performance ke liye: sirf tabhi listen karo jab search dikh raha ho
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [show]); // Jab bhi 'show' change ho, ye effect reset hoga
 
   return (
     <>
@@ -57,35 +30,13 @@ const handleChange = (e) => {
         <div className="navbar-end">
           <ul className="flex items-center justify-center gap-8 text-sm">
             <li>
-              <button onClick={() => dispatch(toggleTheme())} className="p-2">
+              <button onClick={() => dispatch(toggleTheme())} className="p-2 transition-transform active:scale-90">
                 {theme === "light" ? "🌙 Dark" : "☀️ Light"}
               </button>
             </li>
-            <li><Link to="/profile"><UserRound className="hover:text-gray-400" /></Link></li>
-            
-            {/* Search Button */}
-            <li>
-              <button onClick={() => setShow(!show)}>
-                <Search className="hover:text-gray-400" />
-              </button>
-            </li>
-
-            {/* Search Input with REF */}
-            {show && (
-              <input
-               onChange={handleChange} 
-                ref={searchRef} // 3. Ref yahan attach kiya
-                name="input"
-                value={input}
-                type="text"
-                placeholder="Search..."
-                className="absolute left-1/2 -translate-x-1/2 top-20 w-64 p-2 border rounded-md shadow-lg z-50 focus:outline-none text-black"
-                autoFocus
-              />
-            )}
-
-            <li><Link to="/favourite"><Heart className="hover:text-gray-400" /></Link></li>
-            <li><Link to="/cart"><ShoppingCart className="hover:text-gray-400" /></Link></li>
+            <li><Link to="/profile"><UserRound className="hover:text-gray-400 transition-colors" /></Link></li>
+            <li><Link to="/favourite"><Heart className="hover:text-gray-400 transition-colors" /></Link></li>
+            <li><Link to="/cart"><ShoppingCart className="hover:text-gray-400 transition-colors" /></Link></li>
           </ul>
         </div>
       </nav>

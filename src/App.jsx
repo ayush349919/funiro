@@ -6,9 +6,9 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
-import Profile from "./pages/Profile";
 import Favourite from "./pages/Favourite";
-import Cart from "./pages/Cart";
+import ProductCart from "./pages/ProductCart";
+import ProfilePage from "./pages/ProfilePage";
 
 
 function ThemeWrapper({ children }) {
@@ -32,9 +32,9 @@ export default function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/favourite" element={<Favourite/>} />
-          <Route path="/cart" element={<Cart/>} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/favourite" element={<Favourite />} />
+          <Route path="/cart" element={<ProductCart />} />
         </Routes>
       </ThemeWrapper>
     </Provider>
