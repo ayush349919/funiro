@@ -10,9 +10,10 @@ const Profile = () => {
       { id: "#ORD-8832", status: "Shipped", date: "02 Apr", total: "$45.50" }
     ]
   };
+  
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto p-6 space-y-6 font-poppins">
       {/* Header Section */}
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-6">
         <img src={user.avatar} alt="User" className="w-24 h-24 rounded-2xl bg-blue-50 p-2" />

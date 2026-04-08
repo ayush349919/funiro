@@ -47,7 +47,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
     }
 
     return (
-        <section className="container mx-auto px-2 sm:px-4 py-8 md:py-12">
+        <section className="container mx-auto px-2 sm:px-4 py-8 md:py-12 font-poppins">
             {/* Filter Bar: Stacked on very small screens, row on medium */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-10 gap-4 bg-[#F9F1E7] p-4 md:p-6 rounded-lg">
                 {heading && <h2 className="text-xl md:text-2xl font-bold text-gray-800">Our Products</h2>}
@@ -56,7 +56,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                     {/* Category Filter */}
                     <div className="flex items-center gap-2 flex-grow sm:flex-grow-0">
                         <Filter className="w-4 h-4 text-gray-600 shrink-0" />
-                        <select 
+                        <select
                             onChange={(e) => setSelectedCategory(e.target.value)}
                             className="bg-white border border-gray-300 p-1.5 md:p-2 rounded-md text-xs md:text-sm outline-none w-full"
                         >
@@ -69,7 +69,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                     {/* Price Sort */}
                     <div className="flex items-center gap-2 flex-grow sm:flex-grow-0">
                         <span className="text-xs md:text-sm font-medium text-gray-600 shrink-0">Sort:</span>
-                        <select 
+                        <select
                             onChange={(e) => setSortOrder(e.target.value)}
                             className="bg-white border border-gray-300 p-1.5 md:p-2 rounded-md text-xs md:text-sm outline-none w-full"
                         >
@@ -86,7 +86,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                 {displayedItems?.length > 0 ? (
                     displayedItems.map((product) => (
                         <div key={product.id} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col mx-auto w-full max-w-[320px] sm:max-w-none">
-                            
+
                             <div className="relative flex justify-center items-center h-48 md:h-60 bg-gray-100 overflow-hidden">
                                 <img
                                     src={product.images[0]}
@@ -103,12 +103,16 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                                         {product.rating}
                                     </div>
                                 </div>
-                                
+
                                 <div className="flex items-center justify-between mt-auto pt-2">
                                     <span className="text-lg md:text-2xl font-bold text-gray-900">${product.price}</span>
-                                    <button onClick={() => onaddtocartHandler(product)} className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors">
+                                    <button
+                                        onClick={() => onaddtocartHandler(product)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-all duration-200 hover:scale-110 active:scale-90 shadow-md active:shadow-inner"
+                                    >
                                         <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
                                     </button>
+
                                 </div>
                             </div>
                         </div>
@@ -120,8 +124,8 @@ export default function OurProducts({ heading = true, limit = null, button = tru
 
             {button && displayedItems.length > 0 && (
                 <div className="flex justify-center mt-8 md:mt-12">
-                    <button 
-                        onClick={onclickhandler} 
+                    <button
+                        onClick={onclickhandler}
                         className="border-2 border-[#B88E2F] text-[#B88E2F] px-8 md:px-16 py-2 md:py-3 text-sm md:text-base font-semibold hover:bg-[#B88E2F] hover:text-white transition-all duration-300 rounded-md"
                     >
                         {currentlimit === null ? "Show Less" : "Show More"}
