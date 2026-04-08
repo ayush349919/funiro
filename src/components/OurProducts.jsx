@@ -22,25 +22,18 @@ export default function OurProducts({ heading = true, limit = null, button = tru
 
     const getProcessedItems = () => {
         let list = items ? [...items] : [];
-
-        // 1. Pehle Filter karein
         if (selectedCategory !== "All") {
             list = list.filter(item => item.category === selectedCategory);
         }
-
-        // 2. Phir Sort karein
         if (sortOrder === "low-to-high") {
             list.sort((a, b) => a.price - b.price);
         } else if (sortOrder === "high-to-low") {
             list.sort((a, b) => b.price - a.price);
         }
-
-        // 3. End mein Slice karein (Limit ke liye)
         return currentlimit ? list.slice(0, currentlimit) : list;
     };
 
     const displayedItems = getProcessedItems();
-
     const onclickhandler = () => setLimit(currentlimit === null ? limit : null);
     const onaddtocartHandler = (product) => dispatch(addtoCart(product));
 
@@ -54,18 +47,18 @@ export default function OurProducts({ heading = true, limit = null, button = tru
     }
 
     return (
-        <section className="container mx-auto px-4 py-12">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6 bg-[#F9F1E7] p-6 rounded-lg">
-                {heading && <h2 className="text-2xl font-bold text-gray-800">Our Products</h2>}
+        <section className="container mx-auto px-2 sm:px-4 py-8 md:py-12">
+            {/* Filter Bar: Stacked on very small screens, row on medium */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-10 gap-4 bg-[#F9F1E7] p-4 md:p-6 rounded-lg">
+                {heading && <h2 className="text-xl md:text-2xl font-bold text-gray-800">Our Products</h2>}
 
-                {/* Filter & Sort Controls */}
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
                     {/* Category Filter */}
-                    <div className="flex items-center gap-2">
-                        <Filter className="w-4 h-4 text-gray-600" />
-                        <select
+                    <div className="flex items-center gap-2 flex-grow sm:flex-grow-0">
+                        <Filter className="w-4 h-4 text-gray-600 shrink-0" />
+                        <select 
                             onChange={(e) => setSelectedCategory(e.target.value)}
-                            className="bg-white border border-gray-300 p-2 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#B88E2F]"
+                            className="bg-white border border-gray-300 p-1.5 md:p-2 rounded-md text-xs md:text-sm outline-none w-full"
                         >
                             {categories.map(cat => (
                                 <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
@@ -74,52 +67,63 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                     </div>
 
                     {/* Price Sort */}
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-gray-600">Sort by:</span>
-                        <select
+                    <div className="flex items-center gap-2 flex-grow sm:flex-grow-0">
+                        <span className="text-xs md:text-sm font-medium text-gray-600 shrink-0">Sort:</span>
+                        <select 
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className="bg-white border border-gray-300 p-2 rounded-md text-sm outline-none focus:ring-2 focus:ring-[#B88E2F]"
+                            className="bg-white border border-gray-300 p-1.5 md:p-2 rounded-md text-xs md:text-sm outline-none w-full"
                         >
                             <option value="">Default</option>
-                            <option value="low-to-high">Price: Low to High</option>
-                            <option value="high-to-low">Price: High to Low</option>
+                            <option value="low-to-high">Low to High</option>
+                            <option value="high-to-low">High to Low</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            {/* Grid Container */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {/* Grid Container: 1 column for < 640px, then 2, 3, 4 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                 {displayedItems?.length > 0 ? (
                     displayedItems.map((product) => (
-                        <div key={product.id} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-                            {/* ... (Baki product card ka JSX jo aapne pehle likha tha) ... */}
-                            <div className="relative flex justify-center items-center h-60 bg-gray-100 overflow-hidden">
+                        <div key={product.id} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col mx-auto w-full max-w-[320px] sm:max-w-none">
+                            
+                            <div className="relative flex justify-center items-center h-48 md:h-60 bg-gray-100 overflow-hidden">
                                 <img
                                     src={product.images[0]}
                                     alt={product.title}
-                                    className="w-[70%] h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    className="w-[60%] md:w-[70%] h-full object-contain group-hover:scale-110 transition-transform duration-500"
                                 />
                             </div>
-                            <div className="p-5 flex flex-col grow">
-                                <h3 className="font-bold text-lg text-gray-800 line-clamp-1 mb-2">{product.title}</h3>
-                                <div className="flex items-center justify-between mt-auto">
-                                    <span className="text-2xl font-bold text-gray-900">${product.price}</span>
-                                    <button onClick={() => onaddtocartHandler(product)} className="bg-blue-600 hover:bg-blue-700 text-white p-2.5 rounded-lg">
-                                        <ShoppingCart className="w-5 h-5" />
+
+                            <div className="p-3 md:p-5 flex flex-col grow">
+                                <div className="flex justify-between items-start mb-2 gap-1">
+                                    <h3 className="font-bold text-sm md:text-lg text-gray-800 line-clamp-1">{product.title}</h3>
+                                    <div className="flex items-center text-yellow-500 text-xs shrink-0">
+                                        <Star className="w-3 h-3 fill-current mr-0.5" />
+                                        {product.rating}
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center justify-between mt-auto pt-2">
+                                    <span className="text-lg md:text-2xl font-bold text-gray-900">${product.price}</span>
+                                    <button onClick={() => onaddtocartHandler(product)} className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors">
+                                        <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
                                     </button>
                                 </div>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <div className="col-span-full text-center py-10 text-gray-500">No products found in this category.</div>
+                    <div className="col-span-full text-center py-10 text-gray-500 text-sm">No products found.</div>
                 )}
             </div>
 
             {button && displayedItems.length > 0 && (
-                <div className="flex justify-center mt-12">
-                    <button onClick={onclickhandler} className="border-2 border-[#B88E2F] text-[#B88E2F] px-16 py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition-all duration-300 rounded-md">
+                <div className="flex justify-center mt-8 md:mt-12">
+                    <button 
+                        onClick={onclickhandler} 
+                        className="border-2 border-[#B88E2F] text-[#B88E2F] px-8 md:px-16 py-2 md:py-3 text-sm md:text-base font-semibold hover:bg-[#B88E2F] hover:text-white transition-all duration-300 rounded-md"
+                    >
                         {currentlimit === null ? "Show Less" : "Show More"}
                     </button>
                 </div>
