@@ -77,6 +77,7 @@ export default function Inspiration() {
           right: 10% !important;
           width: 40px;
           height: 40px;
+          padding : 8px;
           background: white;
           border-radius: 50%;
           color: #3b82f6 !important; 
