@@ -1,4 +1,6 @@
+import { CheckCheck } from "lucide-react"
 import { useState } from "react"
+import toast from "react-hot-toast"
 import { Link } from "react-router-dom"
 
 export default function Footer() {
@@ -9,14 +11,19 @@ export default function Footer() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        toast.success("Subscribed", {
+            icon: <CheckCheck />,
+            style: {
+                backgroundColor: "red",
+                color: "white"
+            }
+        })
         console.log(data);
     }
     return (
         <>
             <section>
-                {/* ms-0 on mobile, ms-15 on desktop */}
                 <div className="border-s border-t shadow-xl border-footer md:ms-15 mt-10">
-                    {/* flex-col on mobile, flex-row (justify-around) on desktop */}
                     <footer className="footer flex flex-col md:flex-row justify-around bg-base-100 text-base-content p-6 md:p-10 font-poppins gap-10">
                         <aside className="gap-10">
                             <h3 className="text-3xl font-bold">Funiro</h3>
@@ -27,7 +34,6 @@ export default function Footer() {
                             </p>
                         </aside>
                         
-                        {/* Grid for Links and Help on small screens */}
                         <div className="grid grid-cols-2 gap-10 md:flex md:flex-row md:gap-20">
                             <nav className="flex flex-col gap-6">
                                 <h6 className="footer-title text-footer uppercase text-sm font-semibold opacity-50">Links</h6>

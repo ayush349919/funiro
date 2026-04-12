@@ -1,5 +1,7 @@
 import { BookUser, Phone, Clock } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
+
 
 function ContactForm() {
     const contactData = [
@@ -41,6 +43,7 @@ function ContactForm() {
     const onsubmitHandler = (e) => {
         e.preventDefault();
         console.log(input);
+        toast.success(`Contact Submitted Successfully`)
         setInput({
             name: "",
             email: "",

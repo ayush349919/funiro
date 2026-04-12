@@ -10,6 +10,7 @@ import Favourite from "./pages/Favourite";
 import ProductCart from "./pages/ProductCart";
 import ProfilePage from "./pages/ProfilePage";
 import ProceedToPay from "./pages/ProceedToPay"
+import SingleProductPage from "./pages/SingleProductPage";
 
 
 function ThemeWrapper({ children }) {
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/favourite" element={<Favourite />} />
           <Route path="/cart" element={<ProductCart />} />
           <Route path="/checkout" element={<ProceedToPay/>}></Route>
+          <Route path="/details/:id" element={<SingleProductPage/>} ></Route>
         </Routes>
       </ThemeWrapper>
     </Provider>

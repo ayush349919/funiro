@@ -3,11 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/Thunks/Thunks";
 import { LoaderCircle, ShoppingCart, Star, Filter } from "lucide-react";
 import { addtoCart } from "../Redux/Thunks/Addproducts";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 
 export default function OurProducts({ heading = true, limit = null, button = true }) {
     const [currentlimit, setLimit] = useState(limit);
     const [sortOrder, setSortOrder] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const { status, items } = useSelector((state) => state.products);
@@ -35,7 +39,11 @@ export default function OurProducts({ heading = true, limit = null, button = tru
 
     const displayedItems = getProcessedItems();
     const onclickhandler = () => setLimit(currentlimit === null ? limit : null);
-    const onaddtocartHandler = (product) => dispatch(addtoCart(product));
+    const onaddtocartHandler = (product) => {
+        dispatch(addtoCart(product));
+        toast.success(`${product.title} added to cart!`);
+    };
+
 
     if (status === 'loading') {
         return (
@@ -85,7 +93,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
                 {displayedItems?.length > 0 ? (
                     displayedItems.map((product) => (
-                        <div key={product.id} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col mx-auto w-full max-w-[320px] sm:max-w-none">
+                        <div key={product.id} onClick={() => navigate(`/details/${product.id}`)} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col mx-auto w-full max-w-[320px] sm:max-w-none">
 
                             <div className="relative flex justify-center items-center h-48 md:h-60 bg-gray-100 overflow-hidden">
                                 <img
@@ -107,7 +115,7 @@ export default function OurProducts({ heading = true, limit = null, button = tru
                                 <div className="flex items-center justify-between mt-auto pt-2">
                                     <span className="text-lg md:text-2xl font-bold text-gray-900">${product.price}</span>
                                     <button
-                                        onClick={() => onaddtocartHandler(product)}
+                                        onClick={(e) => { e.stopPropagation(); onaddtocartHandler(product) }}
                                         className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-all duration-200 hover:scale-110 active:scale-90 shadow-md active:shadow-inner"
                                     >
                                         <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
