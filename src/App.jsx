@@ -6,7 +6,6 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
-import Favourite from "./pages/Favourite";
 import ProductCart from "./pages/ProductCart";
 import ProfilePage from "./pages/ProfilePage";
 import ProceedToPay from "./pages/ProceedToPay"
@@ -35,7 +34,6 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/favourite" element={<Favourite />} />
           <Route path="/cart" element={<ProductCart />} />
           <Route path="/checkout" element={<ProceedToPay/>}></Route>
           <Route path="/details/:id" element={<SingleProductPage/>} ></Route>

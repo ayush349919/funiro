@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../Redux/slices/theme";
-import { Heart, ShoppingCart, UserRound, Menu, X } from "lucide-react"; // Menu aur X icons add kiye
+import { ShoppingCart, UserRound, Menu, X } from "lucide-react"; // Menu aur X icons add kiye
 import { useState } from "react";
 import logo from "../assets/main.svg";
 
@@ -48,7 +48,6 @@ export default function Navbar() {
           </button>
           
           <Link to="/profile" className="hidden sm:block"><UserRound className="w-5 h-5 hover:text-gray-400" /></Link>
-          <Link to="/favourite" className="hidden sm:block"><Heart className="w-5 h-5 hover:text-gray-400" /></Link>
           <Link to="/cart" className="relative">
             <ShoppingCart className="w-5 h-5 hover:text-gray-400" />
             {/* Optional: Add badge here if you have totalQuantity */}
@@ -71,7 +70,7 @@ export default function Navbar() {
           ))}
           <div className="flex justify-center gap-8 py-2 border-t pt-4 sm:hidden">
              <Link to="/profile" onClick={() => setIsOpen(false)}><UserRound /></Link>
-             <Link to="/favourite" onClick={() => setIsOpen(false)}><Heart /></Link>
+             
           </div>
         </ul>
       </div>
