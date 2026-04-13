@@ -90,7 +90,6 @@ export default function Inspiration() {
           font-weight: bold;
         }
 
-        /* 2. Pagination Dots Styling */
         .inspiration-slider .swiper-pagination-bullet {
           background: #d1d5db !important; /* Inactive Dot Color */
           opacity: 1;
@@ -104,7 +103,6 @@ export default function Inspiration() {
           outline-offset: 4px;
         }
 
-        /* Responsive Fix */
         @media (max-width: 1024px) {
             .inspiration-slider { transform: translateX(0); }
             .inspiration-slider .swiper-button-next { right: 5% !important; }

@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <nav className={`font-poppins sticky top-0 z-50 shadow-sm transition-colors duration-300
-                    ${theme === 'light' ? 'bg-white text-black' : "bg-black text-white"}`}>
+${theme === 'light' ? 'bg-white text-black' : "bg-black text-white"}`}>
       
       {/* Desktop & Mobile Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 flex justify-between items-center min-h-20">

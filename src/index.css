@@ -9,3 +9,5 @@
   --color-normal: #B88E2F;
   --color-footer: #9F9F9F;
 }
+
+@variant dark (&:where(.dark, .dark *));
