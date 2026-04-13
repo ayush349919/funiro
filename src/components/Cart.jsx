@@ -20,12 +20,12 @@ export default function Cart() {
                     </span>
 
                     {/* Grand Total */}
-                    <div className="flex flex-col items-end">
+                    {products.length !== 0 && <div className="flex flex-col items-end">
                         <span className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider font-semibold">Grand Total</span>
                         <span className="text-xl md:text-2xl font-black text-green-600">
                             ${totalprice.toFixed(2)}
                         </span>
-                    </div>
+                    </div>}
                 </div>
             </div>
 
