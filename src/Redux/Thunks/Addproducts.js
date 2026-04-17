@@ -4,7 +4,8 @@ const getSavedCart = () => {
     try {
         const savedData = localStorage.getItem("cart");
         return savedData ? JSON.parse(savedData) : { cartitems: [], totalquantity: 0, totalprice: 0 };
-    } catch (e) {
+    } catch (error) {
+        console.log(error);
         return { cartitems: [], totalquantity: 0, totalprice: 0 };
     }
 };
