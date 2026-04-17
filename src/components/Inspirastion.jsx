@@ -18,16 +18,18 @@ export default function Inspiration() {
   ];
 
   return (
-    <section className="bg-[#FCF8F3] font-poppins py-10 md:py-16 overflow-hidden">
-      {/* Container with justify-end for desktop */}
+    // Added dark:bg-[#121212] and transition
+    <section className="bg-[#FCF8F3] dark:bg-[#121212] font-poppins py-10 md:py-16 overflow-hidden transition-colors duration-300">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-end gap-10 lg:gap-0">
 
         {/* Left Content */}
         <div className="w-full lg:w-[35%] text-center lg:text-left px-6 md:px-10 lg:pl-20 lg:pr-10">
-          <h2 className="text-[24px] md:text-[32px] text-gray-800 font-extrabold leading-tight">
+          {/* Added dark:text-white */}
+          <h2 className="text-[24px] md:text-[32px] text-gray-800 dark:text-white font-extrabold leading-tight">
             50+ Beautiful rooms inspiration
           </h2>
-          <p className="text-gray-600 text-sm mt-4">
+          {/* Added dark:text-gray-400 */}
+          <p className="text-gray-600 dark:text-gray-400 text-sm mt-4">
             Our designer already made a lot of beautiful prototype of rooms that inspire you.
           </p>
           <Link to='/shop'>
@@ -50,20 +52,21 @@ export default function Inspiration() {
               640: { slidesPerView: 2.2 },
               1024: { slidesPerView: 2.8 },
             }}
-            className="h-[350px] md:h-[450px] pb-10" /* Padding added for pagination dots */
+            className="h-[350px] md:h-[450px] pb-10"
           >
             {slides.map((slide) => (
-              <SwiperSlide key={slide.id} className="relative group overflow-hidden rounded-md bg-white">
+              <SwiperSlide key={slide.id} className="relative group overflow-hidden rounded-md bg-white dark:bg-zinc-900">
                 <img
                   src={slide.img}
                   alt={slide.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-10 left-3 bg-white/80 backdrop-blur-sm p-4 min-w-[150px]">
-                  <p className="text-gray-600 text-[12px] flex items-center gap-1">
-                    0{slide.id} <span className="w-6 h-[1px] bg-gray-600"></span> {slide.category}
+                {/* Updated Overlay: bg-white/80 dark:bg-black/70 */}
+                <div className="absolute bottom-10 left-3 bg-white/80 dark:bg-black/70 backdrop-blur-sm p-4 min-w-[150px] transition-colors">
+                  <p className="text-gray-600 dark:text-gray-300 text-[12px] flex items-center gap-1">
+                    0{slide.id} <span className="w-6 h-[1px] bg-gray-600 dark:bg-gray-400"></span> {slide.category}
                   </p>
-                  <h3 className="text-sm md:text-lg font-bold text-gray-800 mt-1">{slide.title}</h3>
+                  <h3 className="text-sm md:text-lg font-bold text-gray-800 dark:text-white mt-1">{slide.title}</h3>
                 </div>
               </SwiperSlide>
             ))}
@@ -72,6 +75,7 @@ export default function Inspiration() {
       </div>
 
       <style>{`
+        /* Updated Swiper Buttons for Dark Mode */
         .inspiration-slider .swiper-button-next, 
         .inspiration-slider .swiper-button-prev {
           right: 10% !important;
@@ -80,9 +84,17 @@ export default function Inspiration() {
           padding : 8px;
           background: white;
           border-radius: 50%;
-          color: #3b82f6 !important; 
+          color: #B88E2F !important; /* Changed to match your theme gold */
           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         } 
+
+        /* Dark mode button adjustment via the data-theme attribute */
+        [data-theme="dark"] .inspiration-slider .swiper-button-next,
+        [data-theme="dark"] .inspiration-slider .swiper-button-prev {
+          background: #333;
+          color: #B88E2F !important;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
 
         .inspiration-slider .swiper-button-next:after,
         .inspiration-slider .swiper-button-prev:after {
@@ -91,15 +103,15 @@ export default function Inspiration() {
         }
 
         .inspiration-slider .swiper-pagination-bullet {
-          background: #d1d5db !important; /* Inactive Dot Color */
+          background: #d1d5db !important;
           opacity: 1;
           width: 10px;
           height: 10px;
         }
 
         .inspiration-slider .swiper-pagination-bullet-active {
-          background: #3b82f6 !important; /* <--- Active Dot Color */
-          outline: 1px solid #3b82f6;
+          background: #B88E2F !important; /* Changed to match theme */
+          outline: 1px solid #B88E2F;
           outline-offset: 4px;
         }
 
